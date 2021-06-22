@@ -2,11 +2,9 @@ import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
 
 export const Articulo = (props) => {
-  const {
-    articulo: { id, nombre, precio, comprado },
-    setModificar,
-    toggleForm,
-  } = props;
+  const { articulo, setModificar, toggleForm, borrarArticulo } = props;
+  const { id, nombre, precio, comprado } = articulo;
+
   return (
     <>
       <li className="articulo">
@@ -22,7 +20,10 @@ export const Articulo = (props) => {
         </span>
         <span className="precio">{precio ? `${precio}€` : precio}</span>
         <i className="borrar">
-          <FaTimes />
+          <FaTimes
+            onClick={() => borrarArticulo(articulo)}
+            style={{ cursor: "pointer" }}
+          />
         </i>
       </li>
     </>
