@@ -1,4 +1,5 @@
 import { FaPlusCircle, FaTimesCircle, FaTimes } from "react-icons/fa";
+import { Formulario } from "../components/Formulario";
 
 export const Lista = () => {
   return (
@@ -9,6 +10,7 @@ export const Lista = () => {
         </i>
         <p className="n-articulos">2/3 comprados</p>
       </section>
+      <Formulario />
       <main className="principal espaciado">
         <ul className="articulos">
           <li className="articulo">
