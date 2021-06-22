@@ -3,7 +3,9 @@ export const Formulario = (props) => {
   return (
     <>
       <main className="principal espaciado">
-        <h2 className="titulo-seccion">Editar artículo</h2>
+        <h2 className="titulo-seccion">
+          {modificar ? "Modificar" : "Añadir"} artículo
+        </h2>
         <form className="form-crear">
           <label htmlFor="nombre">Nombre:</label>
           <input className="control" type="text" id="nombre" />
