@@ -20,7 +20,7 @@ export const Articulo = (props) => {
         >
           {nombre}
         </span>
-        <span className="precio">{precio}€</span>
+        <span className="precio">{precio ? `${precio}€` : precio}</span>
         <i className="borrar">
           <FaTimes />
         </i>
