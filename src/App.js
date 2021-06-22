@@ -28,7 +28,6 @@ function App() {
     listaCompraAPI();
   }, []);
 
-
   const nuevoArticulo = async (articulo) => {
     const articuloCreado = await fetch(urlAPI, {
       method: "POST",
@@ -38,6 +37,7 @@ function App() {
       body: JSON.stringify(articulo),
     });
     setArticulos([...articulos, articuloCreado]);
+  };
 
   const borrarArticulo = async (articuloABorrar) => {
     const response = await fetch(urlAPI + articuloABorrar.id, {
@@ -50,7 +50,6 @@ function App() {
         articulos.filter((articulo) => articuloABorrar.id !== articulo.id)
       );
     }
-
   };
 
   return (
@@ -64,16 +63,12 @@ function App() {
           <AcercaDe />
         </Route>
         <Route path="/lista" exact>
-
           <Lista
             articulos={articulos}
             nuevoArticulo={nuevoArticulo}
             setArticulos={setArticulos}
-  borrarArticulo={borrarArticulo}
+            borrarArticulo={borrarArticulo}
           />
-
-
-
         </Route>
         <Route path="/" exact>
           <Redirect to="/principal" />
