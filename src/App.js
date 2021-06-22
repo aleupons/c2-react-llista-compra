@@ -8,10 +8,12 @@ import { AcercaDe } from "./paginas/AcercaDe";
 import { Formulario } from "./paginas/Formulario";
 import { Lista } from "./paginas/Lista";
 import { Principal } from "./paginas/Principal";
+import { Header } from "./components/Header";
 
 function App() {
   return (
     <Router>
+      <Header />
       <Switch>
         <Route path="/principal" exact>
           <Principal />
