@@ -11,17 +11,23 @@ import { Header } from "./components/Header";
 import { useEffect, useState } from "react";
 
 function App() {
-  const urlAPI = "http://localhost:3001/articulos";
+  const urlAPI = "http://localhost:3001/articulos/";
   const [articulos, setArticulos] = useState([]);
 
   const listaCompraAPI = async () => {
     const response = await fetch(urlAPI);
+    if (!response.ok) {
+      return;
+    }
     const datos = await response.json();
-    setArticulos(datos);
+    if (datos) {
+      setArticulos(datos);
+    }
   };
   useEffect(() => {
     listaCompraAPI();
   }, []);
+
 
   const nuevoArticulo = async (articulo) => {
     const articuloCreado = await fetch(urlAPI, {
@@ -32,6 +38,19 @@ function App() {
       body: JSON.stringify(articulo),
     });
     setArticulos([...articulos, articuloCreado]);
+
+  const borrarArticulo = async (articuloABorrar) => {
+    const response = await fetch(urlAPI + articuloABorrar.id, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      return;
+    } else {
+      setArticulos(
+        articulos.filter((articulo) => articuloABorrar.id !== articulo.id)
+      );
+    }
+
   };
 
   return (
@@ -45,11 +64,16 @@ function App() {
           <AcercaDe />
         </Route>
         <Route path="/lista" exact>
+
           <Lista
             articulos={articulos}
             nuevoArticulo={nuevoArticulo}
             setArticulos={setArticulos}
+  borrarArticulo={borrarArticulo}
           />
+
+
+
         </Route>
         <Route path="/" exact>
           <Redirect to="/principal" />
