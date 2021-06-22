@@ -23,6 +23,17 @@ function App() {
     listaCompraAPI();
   }, []);
 
+  const nuevoArticulo = async (articulo) => {
+    const articuloCreado = await fetch(urlAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(articulo),
+    });
+    setArticulos([...articulos, articuloCreado]);
+  };
+
   return (
     <Router>
       <Header />
@@ -34,7 +45,11 @@ function App() {
           <AcercaDe />
         </Route>
         <Route path="/lista" exact>
-          <Lista articulos={articulos} />
+          <Lista
+            articulos={articulos}
+            nuevoArticulo={nuevoArticulo}
+            setArticulos={setArticulos}
+          />
         </Route>
         <Route path="/" exact>
           <Redirect to="/principal" />

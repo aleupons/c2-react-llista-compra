@@ -5,7 +5,7 @@ import { Articulo } from "../components/Articulo";
 import { Formulario } from "../components/Formulario";
 
 export const Lista = (props) => {
-  const { articulos } = props;
+  const { articulos, nuevoArticulo, setArticulos } = props;
   const [formulario, setFormulario] = useState(false);
   const [modificar, setModificar] = useState(false);
   const toggleForm = () => {
@@ -25,7 +25,14 @@ export const Lista = (props) => {
         </i>
         <p className="n-articulos">2/3 comprados</p>
       </section>
-      {formulario && <Formulario modificar={modificar} />}
+      {formulario && (
+        <Formulario
+          modificar={modificar}
+          nuevoArticulo={nuevoArticulo}
+          setArticulos={setArticulos}
+          articulos={articulos}
+        />
+      )}
       {!formulario && (
         <main className="principal espaciado">
           <ul className="articulos">
