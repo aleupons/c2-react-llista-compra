@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const Formulario = (props) => {
   const { modificar } = props;
   return (
@@ -20,4 +22,8 @@ export const Formulario = (props) => {
       </main>
     </>
   );
+};
+
+Formulario.propTypes = {
+  modificar: PropTypes.bool.isRequired,
 };
