@@ -34,7 +34,7 @@ function App() {
           <AcercaDe />
         </Route>
         <Route path="/lista" exact>
-          <Lista />
+          <Lista articulos={articulos} />
         </Route>
         <Route path="/" exact>
           <Redirect to="/principal" />

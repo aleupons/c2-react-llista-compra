@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { FaPlusCircle, FaTimesCircle } from "react-icons/fa";
 import { Articulo } from "../components/Articulo";
 import { Formulario } from "../components/Formulario";
 
-export const Lista = () => {
+export const Lista = (props) => {
+  const { articulos } = props;
   const [formulario, setFormulario] = useState(false);
   const [modificar, setModificar] = useState(false);
   const toggleForm = () => {
@@ -27,11 +29,22 @@ export const Lista = () => {
       {!formulario && (
         <main className="principal espaciado">
           <ul className="articulos">
-            <Articulo setModificar={setModificar} toggleForm={toggleForm} />
+            {articulos.map((articulo) => (
+              <Articulo
+                key={articulo.id}
+                articulo={articulo}
+                setModificar={setModificar}
+                toggleForm={toggleForm}
+              />
+            ))}
           </ul>
           <span className="precio-total">1.95€</span>
         </main>
       )}
     </>
   );
+};
+
+Lista.propTypes = {
+  articulos: PropTypes.array.isRequired,
 };
