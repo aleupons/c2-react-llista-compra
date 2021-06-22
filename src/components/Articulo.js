@@ -1,9 +1,15 @@
 import PropTypes from "prop-types";
+import { useCallback, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 export const Articulo = (props) => {
-  const { articulo, setModificar, toggleForm, borrarArticulo } = props;
+  const { articulo, setAccion, toggleForm, borrarArticulo, setIdArticulo } =
+    props;
   const { id, nombre, precio, comprado } = articulo;
+
+  const getId = useCallback(() => {
+    setIdArticulo(id);
+  }, [id, setIdArticulo]);
 
   return (
     <>
@@ -12,7 +18,8 @@ export const Articulo = (props) => {
         <span
           className="nombre"
           onClick={() => {
-            setModificar(true);
+            setAccion("modificar");
+            getId();
             toggleForm();
           }}
         >
@@ -37,6 +44,6 @@ Articulo.propTypes = {
     precio: PropTypes.number,
     comprado: PropTypes.bool.isRequired,
   }), //Potser no hi ha cap article
-  setModificar: PropTypes.func.isRequired,
+  setAccion: PropTypes.func.isRequired,
   toggleForm: PropTypes.func.isRequired,
 };

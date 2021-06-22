@@ -5,22 +5,25 @@ import { Articulo } from "../components/Articulo";
 import { Formulario } from "../components/Formulario";
 
 export const Lista = (props) => {
-
-  const { articulos, nuevoArticulo, setArticulos,borrarArticulo } = props;
-
+  const { articulos, nuevoArticulo, borrarArticulo, modificarArticulo } = props;
 
   const [formulario, setFormulario] = useState(false);
-  const [modificar, setModificar] = useState(false);
+  const [accion, setAccion] = useState("");
   const toggleForm = () => {
     setFormulario(!formulario);
   };
+  const precioTotal = articulos.reduce(
+    (acumulador, articulo) => articulo.precio + acumulador,
+    0
+  );
+  const [idArticulo, setIdArticulo] = useState(null);
   return (
     <>
       <section className="info espaciado bloque-superior">
         <i
           className="icono"
           onClick={() => {
-            setModificar(false);
+            setAccion("anyadir");
             toggleForm();
           }}
         >
@@ -30,10 +33,12 @@ export const Lista = (props) => {
       </section>
       {formulario && (
         <Formulario
-          modificar={modificar}
-          nuevoArticulo={nuevoArticulo}
-          setArticulos={setArticulos}
+          accion={accion}
           articulos={articulos}
+          idArticulo={idArticulo}
+          setFormulario={setFormulario}
+          nuevoArticulo={nuevoArticulo}
+          modificarArticulo={modificarArticulo}
         />
       )}
       {!formulario && (
@@ -43,13 +48,16 @@ export const Lista = (props) => {
               <Articulo
                 key={articulo.id}
                 articulo={articulo}
-                setModificar={setModificar}
+                setAccion={setAccion}
                 toggleForm={toggleForm}
                 borrarArticulo={borrarArticulo}
+                setIdArticulo={setIdArticulo}
               />
             ))}
           </ul>
-          <span className="precio-total">1.95€</span>
+          <span className="precio-total">
+            {precioTotal ? `${precioTotal}€` : precioTotal}
+          </span>
         </main>
       )}
     </>

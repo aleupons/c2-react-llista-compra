@@ -135,6 +135,7 @@ i.icono {
   font-size: 18px;
   color: #fff;
   background-color: var(--color-secundario);
+  cursor: pointer;
 }
 .home {
   height: calc(100vh - 148px);
