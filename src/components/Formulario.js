@@ -1,22 +1,60 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Formulario = (props) => {
-  const { modificar, nuevoArticulo } = props;
-  const [articulo, setArticulo] = useState("");
+  const {
+    accion,
+    articulos,
+    idArticulo,
+    setFormulario,
+    nuevoArticulo,
+    modificarArticulo,
+  } = props;
+  const idMasAlta = articulos.reduce((acumulador, articulo) => {
+    if (articulo.id > acumulador) {
+      acumulador = articulo.id;
+      return articulo.id;
+    } else {
+      return acumulador;
+    }
+  }, 0);
+  const [articulo, setArticulo] = useState({
+    id: idMasAlta + 1,
+    nombre: "",
+    precio: "",
+    comprado: false,
+  });
 
-  const anyadirArticulo = (e) => {
+  useEffect(() => {
+    if (accion === "modificar") {
+      setArticulo(
+        articulos.find(
+          (articuloAModificar) => articuloAModificar.id === idArticulo
+        )
+      );
+    }
+  }, [accion, articulos, idArticulo]);
+
+  const submitArticulo = (e) => {
     e.preventDefault();
-    nuevoArticulo({ articulo });
+    if (accion === "anyadir") {
+      console.log(articulo);
+      nuevoArticulo(articulo);
+      setFormulario(false);
+    } else if (accion === "modificar") {
+      console.log(articulo);
+      modificarArticulo(articulo);
+      setFormulario(false);
+    }
   };
 
   return (
     <>
       <main className="principal espaciado">
         <h2 className="titulo-seccion">
-          {modificar ? "Modificar" : "Añadir"} artículo
+          {accion === "modificar" ? "Modificar" : "Añadir"} artículo
         </h2>
-        <form className="form-crear" noValidate onSubmit={anyadirArticulo}>
+        <form className="form-crear" noValidate onSubmit={submitArticulo}>
           <label htmlFor="nombre">Nombre:</label>
           <input
             className="control"
@@ -36,14 +74,14 @@ export const Formulario = (props) => {
               id="precio"
               value={articulo.precio}
               onChange={(e) =>
-                setArticulo({ ...articulo, precio: e.target.value })
+                setArticulo({ ...articulo, precio: +e.target.value })
               }
               // ref={elementoInput}
             />
             €
           </div>
           <button className="enviar" type="submit">
-            {modificar ? "Modificar" : "Añadir"}
+            {accion === "modificar" ? "Modificar" : "Añadir"}
           </button>
         </form>
       </main>
@@ -52,5 +90,5 @@ export const Formulario = (props) => {
 };
 
 Formulario.propTypes = {
-  modificar: PropTypes.bool.isRequired,
+  accion: PropTypes.string.isRequired,
 };

@@ -36,7 +36,34 @@ function App() {
       },
       body: JSON.stringify(articulo),
     });
-    setArticulos([...articulos, articuloCreado]);
+    if (!articuloCreado.ok) {
+      return;
+    } else {
+      setArticulos([...articulos, articulo]);
+    }
+  };
+
+  const modificarArticulo = async (articuloAModificar) => {
+    const response = await fetch(urlAPI + articuloAModificar.id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(articuloAModificar),
+    });
+    if (!response.ok) {
+      return;
+    } else {
+      setArticulos(
+        articulos.map((articulo) => {
+          if (articulo.id === articuloAModificar.id) {
+            return articuloAModificar;
+          } else {
+            return articulo;
+          }
+        })
+      );
+    }
   };
 
   const borrarArticulo = async (articuloABorrar) => {
@@ -68,6 +95,7 @@ function App() {
             nuevoArticulo={nuevoArticulo}
             setArticulos={setArticulos}
             borrarArticulo={borrarArticulo}
+            modificarArticulo={modificarArticulo}
           />
         </Route>
         <Route path="/" exact>
