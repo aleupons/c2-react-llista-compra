@@ -1,10 +1,6 @@
 export const Formulario = () => {
   return (
     <>
-      <section className="info espaciado bloque-superior">
-        <i className="icono fas fa-minus-circle"></i>
-        <p className="n-articulos">2/3 comprados</p>
-      </section>
       <main className="principal espaciado">
         <h2 className="titulo-seccion">Editar artículo</h2>
         <form className="form-crear">

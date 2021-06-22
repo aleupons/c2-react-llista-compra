@@ -5,7 +5,6 @@ import {
   Switch,
 } from "react-router-dom";
 import { AcercaDe } from "./paginas/AcercaDe";
-import { Formulario } from "./paginas/Formulario";
 import { Lista } from "./paginas/Lista";
 import { Principal } from "./paginas/Principal";
 import { Header } from "./components/Header";
@@ -20,9 +19,6 @@ function App() {
         </Route>
         <Route path="/acerca-de" exact>
           <AcercaDe />
-        </Route>
-        <Route path="/formulario" exact>
-          <Formulario />
         </Route>
         <Route path="/lista" exact>
           <Lista />
