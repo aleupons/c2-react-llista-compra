@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FaPlusCircle, FaTimesCircle, FaTimes } from "react-icons/fa";
+import { FaPlusCircle, FaTimesCircle } from "react-icons/fa";
+import { Articulo } from "../components/Articulo";
 import { Formulario } from "../components/Formulario";
 
 export const Lista = () => {
@@ -15,33 +16,11 @@ export const Lista = () => {
         </i>
         <p className="n-articulos">2/3 comprados</p>
       </section>
-      {formulario && <Formulario />}
+      {formulario && <Formulario modificar={false} />}
       {!formulario && (
         <main className="principal espaciado">
           <ul className="articulos">
-            <li className="articulo">
-              <input type="checkbox" className="marcar" />
-              <span className="nombre">Pan</span>
-              <span className="precio">0.75€</span>
-              <i className="borrar">
-                <FaTimes />
-              </i>
-            </li>
-            <li className="articulo">
-              <input type="checkbox" className="marcar" />
-              <span className="nombre">Azúcar</span>
-              <i className="borrar">
-                <FaTimes />
-              </i>
-            </li>
-            <li className="articulo">
-              <input type="checkbox" className="marcar" />
-              <span className="nombre">Leche</span>
-              <span className="precio">1.20€</span>
-              <i className="borrar">
-                <FaTimes />
-              </i>
-            </li>
+            <Articulo formulario={formulario} toggleForm={toggleForm} />
           </ul>
           <span className="precio-total">1.95€</span>
         </main>
