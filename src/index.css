@@ -110,6 +110,7 @@ i.icono {
 }
 .nombre {
   flex: 1;
+  cursor: pointer;
 }
 .titulo-seccion {
   margin-bottom: 20px;
