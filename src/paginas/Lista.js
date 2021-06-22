@@ -1,3 +1,5 @@
+import { Formulario } from "../components/Formulario";
+
 export const Lista = () => {
   return (
     <>
@@ -5,6 +7,7 @@ export const Lista = () => {
         <i className="icono fas fa-plus-circle"></i>
         <p className="n-articulos">2/3 comprados</p>
       </section>
+      <Formulario />
       <main className="principal espaciado">
         <ul className="articulos">
           <li className="articulo">
