@@ -8,15 +8,16 @@ import { AcercaDe } from "./paginas/AcercaDe";
 import { Lista } from "./paginas/Lista";
 import { Principal } from "./paginas/Principal";
 import { Header } from "./components/Header";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const urlAPI = "http://localhost:3001/articulos";
+  const [articulos, setArticulos] = useState([]);
 
   const listaCompraAPI = async () => {
     const response = await fetch(urlAPI);
     const datos = await response.json();
-    console.log(datos);
+    setArticulos(datos);
   };
   useEffect(() => {
     listaCompraAPI();
